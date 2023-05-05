@@ -4,8 +4,8 @@ from tkinter import ttk
 # criar a janela da calculadora
 janela = tk.Tk()
 janela.title("Calculadora de Gastos de Energia Elétrica")
-janela.geometry("400x250")
-janela.configure(bg="white")
+janela.geometry("500x250")
+janela.configure(bg="lightgray")
 # criar a lista de aparelhos e seus respectivos consumos de energia em watts
 aparelhos = {
     "Chuveiro": 7500,
@@ -67,7 +67,9 @@ estilo.configure('RoundedEntry.TEntry', borderwidth=0,
                   relief="flat", 
                   background="#f7f7f7", 
                   foreground="#333",
-                  font=("Arial", 12))
+                  font=("Arial", 12),
+                  border='5m'),
+                  
 
 
 # criar os widgets da interface gráfica da calculadora
@@ -80,11 +82,13 @@ aparelho_menu.grid(row=0, column=1, padx=10, pady=10)
 tempo_label = tk.Label(janela, text="Informe o tempo de uso (horas):")
 tempo_label.grid(row=1, column=0, padx=10, pady=10, sticky="w")
 tempo = ttk.Entry(janela,style='RoundedEntry.TEntry')
+
 tempo.grid(row=1, column=1, padx=10, pady=10)
 tempo.bind("<KeyRelease>", atualizar_resultado)
 preco_label = tk.Label(janela, text="Informe o preço da energia (R$/kWh):")
 preco_label.grid(row=2, column=0, padx=10, pady=10, sticky="w")
-preco_energia = tk.Entry(janela)
+
+preco_energia = ttk.Entry(janela, style='RoundedEntry.TEntry')
 preco_energia.insert(0, "0.8")
 preco_energia.grid(row=2, column=1, padx=10, pady=10)
 preco_energia.bind("<KeyRelease>", atualizar_resultado)
