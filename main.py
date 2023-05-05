@@ -1,10 +1,11 @@
 import tkinter as tk
+from tkinter import ttk
 
 # criar a janela da calculadora
 janela = tk.Tk()
 janela.title("Calculadora de Gastos de Energia Elétrica")
 janela.geometry("400x250")
-
+janela.configure(bg="white")
 # criar a lista de aparelhos e seus respectivos consumos de energia em watts
 aparelhos = {
     "Chuveiro": 7500,
@@ -59,6 +60,15 @@ def atualizar_resultado(*args):
     # atualizar o resultado na tela da calculadora
     resultado.config(text="Custo Efetivo: R$ {} em {} horas.".format(custo_efetivo,tempo_uso))
 
+# criar o estilo dos widgets
+
+estilo = ttk.Style()
+estilo.configure('RoundedEntry.TEntry', borderwidth=0, 
+                  relief="flat", 
+                  background="#f7f7f7", 
+                  foreground="#333",
+                  font=("Arial", 12))
+
 
 # criar os widgets da interface gráfica da calculadora
 aparelho_label = tk.Label(janela, text="Selecione o aparelho:")
@@ -69,7 +79,7 @@ aparelho_menu = tk.OptionMenu(janela, aparelho, *aparelhos.keys(), command=atual
 aparelho_menu.grid(row=0, column=1, padx=10, pady=10)
 tempo_label = tk.Label(janela, text="Informe o tempo de uso (horas):")
 tempo_label.grid(row=1, column=0, padx=10, pady=10, sticky="w")
-tempo = tk.Entry(janela)
+tempo = ttk.Entry(janela,style='RoundedEntry.TEntry')
 tempo.grid(row=1, column=1, padx=10, pady=10)
 tempo.bind("<KeyRelease>", atualizar_resultado)
 preco_label = tk.Label(janela, text="Informe o preço da energia (R$/kWh):")
